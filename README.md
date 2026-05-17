@@ -58,6 +58,8 @@ Then upload `*_pose_motion.json` or the source video into the notebook session.
 
 ## Colab MuJoCo Replay
 
+You can open `colab_mujoco_replay.ipynb` directly in Colab after cloning/opening the GitHub repo.
+
 After cloning the repo in Colab:
 
 ```python
