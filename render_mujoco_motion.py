@@ -83,10 +83,12 @@ def rgba_for_landmark(name: str) -> str:
     return "0.2 0.2 0.2 1"
 
 
-def build_mjcf(landmark_names: list[str]) -> str:
+def build_mjcf(landmark_names: list[str], width: int, height: int) -> str:
     mujoco_node = ET.Element("mujoco", model="kungfu_mocap")
     ET.SubElement(mujoco_node, "compiler", angle="degree")
     ET.SubElement(mujoco_node, "option", timestep="0.0166667")
+    visual = ET.SubElement(mujoco_node, "visual")
+    ET.SubElement(visual, "global", offwidth=str(width), offheight=str(height))
 
     asset = ET.SubElement(mujoco_node, "asset")
     ET.SubElement(asset, "material", name="floor_mat", rgba="0.9 0.9 0.86 1")
@@ -181,7 +183,7 @@ def render_motion(
         raise ValueError(f"No frames found in {motion_path}")
 
     landmark_names = select_landmarks(frames)
-    mjcf = build_mjcf(landmark_names)
+    mjcf = build_mjcf(landmark_names, width, height)
 
     with tempfile.NamedTemporaryFile("w", suffix=".xml", delete=False) as handle:
         handle.write(mjcf)
