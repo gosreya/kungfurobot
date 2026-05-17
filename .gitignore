@@ -1,0 +1,18 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.matplotlib-cache/
+
+.venv/
+.venv-*/
+
+# Raw captures and generated media/data can be large. Keep local by default.
+*.mov
+*.mp4
+*.avi
+*.mkv
+*.webm
+pose_output/
+
+# Downloaded MediaPipe task models are reproducible from the setup script/docs.
+models/*.task
