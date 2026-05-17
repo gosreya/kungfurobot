@@ -166,10 +166,10 @@ def render_motion(
     min_visibility: float,
 ) -> None:
     if motion_path.is_dir():
-        matches = sorted(motion_path.glob("*_pose_motion.json"))
+        matches = sorted(motion_path.rglob("*_pose_motion.json"))
         if not matches:
             raise FileNotFoundError(
-                f"No *_pose_motion.json file found in directory: {motion_path}"
+                f"No *_pose_motion.json file found under directory: {motion_path}"
             )
         motion_path = matches[0]
 
