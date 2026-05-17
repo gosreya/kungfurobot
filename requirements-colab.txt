@@ -3,3 +3,4 @@ opencv-python==4.11.0.86
 mediapipe==0.10.21
 mujoco>=3.3
 imageio>=2.34
+imageio-ffmpeg>=0.5

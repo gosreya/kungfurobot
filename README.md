@@ -10,6 +10,7 @@ Pose-estimation and motion-recording pipeline for a short kung fu clip.
    - hip-centered landmark positions
    - per-frame joint angles
    - skeleton-only preview video
+4. `render_mujoco_motion.py` renders the normalized motion as MuJoCo mocap markers.
 
 ## Local Setup
 
@@ -54,3 +55,34 @@ In Colab:
 ```
 
 Then upload `*_pose_motion.json` or the source video into the notebook session.
+
+## Colab MuJoCo Replay
+
+After cloning the repo in Colab:
+
+```python
+%cd kungfurobot
+!pip install -r requirements-colab.txt
+```
+
+Upload the local `*_pose_motion.json` file:
+
+```python
+from google.colab import files
+uploaded = files.upload()
+motion_json = next(name for name in uploaded if name.endswith("_pose_motion.json"))
+motion_json
+```
+
+Render the MuJoCo replay:
+
+```python
+!python render_mujoco_motion.py "$motion_json" --output mujoco_motion_replay.mp4
+```
+
+Show the rendered video:
+
+```python
+from IPython.display import Video
+Video("mujoco_motion_replay.mp4", embed=True)
+```
