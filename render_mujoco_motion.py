@@ -165,6 +165,14 @@ def render_motion(
     world_scale: float,
     min_visibility: float,
 ) -> None:
+    if motion_path.is_dir():
+        matches = sorted(motion_path.glob("*_pose_motion.json"))
+        if not matches:
+            raise FileNotFoundError(
+                f"No *_pose_motion.json file found in directory: {motion_path}"
+            )
+        motion_path = matches[0]
+
     with motion_path.open() as handle:
         motion = json.load(handle)
 
